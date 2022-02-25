@@ -1,0 +1,120 @@
+{%- for block in section.blocks -%}
+	{%- case block.type -%}
+		{%- when 'custom_announcement_bar' -%}
+			{% if block.settings.show_announcement_bar %}
+				<p class="announcement" style="background-color: {{block.settings.bg_color}}; justify-content: {{block.settings.hor_align}}" {{ block.shopify_attributes }}>
+                  <span class="announcement__text" style="color: {{block.settings.message_color}}">
+                    {{block.settings.message | escape}}
+                  </span>
+                  {% if block.settings.link_url != blank %}
+                  	<a href={{block.settings.link_url}} class="announcement__link" style="color: {{block.settings.link_text_color}};">
+                      {{block.settings.link_text}}
+                  	</a>
+                  {% endif %}
+				</div>
+			{% endif %}
+	{%- endcase -%}
+{%- endfor -%}
+
+{% schema %}
+{
+	"name": "Sharif__Announcement_Bar",
+	"max_blocks": 2,
+	"blocks": [
+		{
+			"type": "custom_announcement_bar",
+			"name": "Show announcement",
+			"settings": [
+				{
+					"type": "checkbox",
+					"id": "show_announcement_bar",
+					"label": "Show announcement bar",
+					"default": true
+				},
+				{
+					"type": "text",
+					"id": "message",
+					"label": "Announcement text",
+					"default": "Add announcement bar message here."
+				},
+				{
+					"type": "text",
+					"id": "link_text",
+					"label": "Link message",
+					"default": "Learn more."
+				},
+				{
+					"type": "url",
+					"id": "link_url",
+					"label": "Link url"
+				},
+				{
+  					"type": "select",
+  					"id": "hor_align",
+  					"label": "Horizontal alignment",
+  					"options": [
+    					{
+      						"value": "left",
+      						"label": "Left"
+    					},
+    					{
+      						"value": "center",
+      						"label": "Center"
+    					},
+    					{
+      						"value": "right",
+     					 	"label": "Right"
+    					}
+  					],
+  					"default": "center"
+				},
+				{
+					"type": "color",
+					"id": "bg_color",
+					"label": "Background color",
+					"default": "#fff"
+				},
+				{
+					"type": "color",
+					"id": "message_color",
+					"label": "Message color",
+					"default": "#fff"
+				},
+{
+					"type": "color",
+					"id": "link_text_color",
+					"label": "Link text color",
+					"default": "#fff"
+				}
+			]
+		}
+	]
+}
+{% endschema %}
+
+{% stylesheet %}
+	.announcement {
+		display: flex;
+		flex-direction: column;
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+	.announcement__text {
+		
+	}
+	.announcement__link {
+		text-decoration: underline;
+	}
+
+	@media screen and (min-width: 768px) {
+		.announcement {
+			flex-direction: row;
+		}
+		.announcement__text {
+			text
+		}
+	}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
